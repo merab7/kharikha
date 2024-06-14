@@ -1,6 +1,5 @@
-{% extends 'base.html' %} {% load static %}{% block content %} {% load i18n %}
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% block content %}
 
-<!-- Swiper Section -->
 <section class="p-0">
   <div class="full-screen">
     <div class="swiper-wrapper">
@@ -58,8 +57,71 @@
   </div>
 </section>
 
+<!-- Categories Section -->
+<section id="categories-section">
+  <div class="container">
+    <div class="row mb-5 xs-mb-8">
+      <div class="container">
+        <div class="row mb-5 xs-mb-8">
+          <div class="col-12 text-center">
+            <h2 class="alt-font text-dark-gray mb-0 ls-minus-2px">
+              <span class="text-highlight fw-600"
+                >CATEGORIES<span class="bg-base-color h-5px bottom-2px"></span
+              ></span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <ul class="shop-modern d-flex justify-content-between flex-wrap">
+      {% for category in categories %}
+      <li class="grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4">
+        <div class="shop-box mb-10px p-5">
+          <div class="shop-image mb-20px position-relative">
+            <a href="{% url 'category' category.name %}">
+              <img src="{{ category.image.url }}" alt="{{ category.name }}" />
+              <div
+                class="shop-overlay bg-gradient-gray-light-dark-transparent"
+              ></div>
+
+              <div
+                class="shop-hover d-flex justify-content-center align-items-center w-100 h-100 position-absolute top-0 start-0"
+              >
+                <div class="shop-buttons-wrap">
+                  <a
+                    href="{% url 'category' category.name %}"
+                    class="alt-font btn btn-small btn-box-shadow btn-round-edge left-icon add-to-cart custom-add-to-cart-btn"
+                  >
+                    <i class="bi-cart-fill"></i>
+                    <span class="quick-view-text button-text"
+                      >{% trans "See category" %}</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="shop-footer text-center">
+            <a
+              href="{% url 'category' category.name %}"
+              class="alt-font text-dark-gray fs-19 fw-500"
+              >{{ category.name }}</a
+            >
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
 <!-- Products Section -->
-<section class="mt-5 ps-7 pe-7 pb-3 lg-ps-3 lg-pe-3 sm-pb-6 xs-px-0">
+<section
+  id="products-section"
+  class="mt-5 ps-7 pe-7 pb-3 lg-ps-3 lg-pe-3 sm-pb-6 xs-px-0"
+>
   <div class="container">
     <div class="row mb-5 xs-mb-8">
       <div class="container">
@@ -157,5 +219,4 @@
   </div>
 </section>
 
-<!-- End Products Section -->
 {% endblock %}

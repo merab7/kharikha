@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 #category for the products
 class Category(models.Model):
     name = models.CharField(max_length=50)
+    image = models.ImageField('uploads/products', blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name
