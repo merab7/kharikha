@@ -44,18 +44,11 @@
                     {{ product.sale }}% {% trans "Off" %}
                   </div>
                   {% endif %}
-                  <div
-                    class="shop-hover d-flex justify-content-center align-items-center w-100 h-100 position-absolute top-0 start-0"
-                  >
+                  <div class="shop-hover d-flex justify-content-center align-items-center w-100 h-100 position-absolute top-0 start-0">
                     <div class="shop-buttons-wrap">
-                      <a
-                        href="{% url 'details' product.id %}"
-                        class="alt-font btn btn-small btn-box-shadow btn-round-edge left-icon add-to-cart custom-add-to-cart-btn"
-                      >
+                      <a href="{% url 'details' product.id %}" class="alt-font btn btn-small btn-box-shadow btn-round-edge left-icon add-to-cart custom-add-to-cart-btn" style="background-color: black; color: white;">
                         <i class="bi-cart-fill"></i>
-                        <span class="quick-view-text button-text"
-                          >{% trans "Add to cart" %}</span
-                        >
+                        <span class="quick-view-text button-text">{% trans "Add to cart" %}</span>
                       </a>
                     </div>
                   </div>

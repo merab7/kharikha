@@ -123,12 +123,15 @@
                     {% trans "Home" %}
                   </a>
                 </li>
+                <!-- this links appears only when user is home page -->
+                {% if request.resolver_match.url_name == 'home' %}
                 <li class="nav-item">
                   <a class="nav-link" href="#categories-section">Categories</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#products-section">Products</a>
                 </li>
+                {% endif %}
               </ul>
             </div>
           </div>
