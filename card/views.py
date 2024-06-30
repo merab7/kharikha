@@ -1,10 +1,12 @@
+import json
+from os import error
+from urllib import response
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .cart import Cart
 from store.models import Product, ProductSize
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
-
+from payment.models import CuponCode
 
 
 def cart_sum(request):
@@ -91,5 +93,38 @@ def cart_del(request, id , size):
     cart = Cart(request)
     cart.delete(cart_key=cart_key)
     return redirect('cart_sum')
+
+
+
+def cupon_code(request):
+    cart = Cart(request)
+    cart_products = cart.get_products()
+    quantities = cart.get_quantities()
+    prices = [ ]     
+    if quantities:
+        for key, item in quantities.items():
+             for product in cart_products:
+                 if product.name == item['name']:
+                     if product.sale > 0:
+                          prices.append(product.new_price * item['quantity'])
+                     else:
+                         prices.append(product.price * item['quantity'])
+    
+    if request.POST.get('action') == 'post':   
+
+        entered_code = request.POST.get('cupon')
+        codes_in_db = CuponCode.objects.filter(code=entered_code)
+
+        if codes_in_db.exists():
+            new_sum = sum(prices) - ((sum(prices) * codes_in_db[0].sale_percentage) / 100)
+
+            response = JsonResponse({'new_sum': new_sum, 'percetage':codes_in_db[0].sale_percentage})
+            #deleting code from database after use
+            codes_in_db[0].delete()
+        else:
+            response = JsonResponse({'error_text': 'Coupon code is not valid'}, status=400)
+
+        return response
+
 
         

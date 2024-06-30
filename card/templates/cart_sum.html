@@ -166,12 +166,16 @@
                     type="text"
                     class="bg-white border-radius-4px"
                     placeholder="{% trans 'Coupon code' %}"
+                    id="cupon"
                   />
-                  <a
-                    href="#"
+                  <button
+                    type="button"
+                    id="apply"
                     class="btn apply-coupon-btn fs-13 fw-600 text-uppercase"
-                    >{% trans 'Apply' %}</a
+                    >{% trans 'Apply' %}</button
                   >
+                  <small id="success_text" class="text-green"></small>
+                  <small id="error" class="text-red"></small>
                 </div>
               </div>
             </div>
@@ -204,7 +208,7 @@
                 </th>
                 <td data-title="{% trans 'Shipping' %}">
                   <ul class="p-0 m-0">
-                    <li class="d-flex align-items-center">
+                    <!-- <li class="d-flex align-items-center">
                       <input
                         id="free_shipping"
                         type="radio"
@@ -212,10 +216,11 @@
                         class="d-block w-auto mb-0 me-10px p-0"
                         checked="checked"
                       />
-                      <label class="md-line-height-18px" for="free_shipping"
+                      <label class="md-line-height-18px d" for="free_shipping"
                         >{% trans "with card" %}</label
                       >
-                    </li>
+                    </li> -->
+                    <small class="text-red">Card-coming soon!</small>
                     <li class="d-flex align-items-center">
                       <input
                         id="local_pickup"
@@ -236,7 +241,7 @@
                   {% trans "Total" %}
                 </th>
                 <td class="pb-0" data-title="{% trans 'Total' %}">
-                  <h6 class="d-block fw-700 mb-0 text-dark-gray alt-font">
+                  <h6 class="d-block fw-700 mb-0 text-dark-gray alt-font" id="sum">
                     ${{ summary }}
                   </h6>
                 </td>
@@ -260,5 +265,33 @@
     </div>
   </div>
 </section>
-
+<script>
+    $("#apply").click(function () {
+        var cuponCode = $("#cupon").val();
+        $.ajax({
+            type: "POST",
+            url: "{% url 'cupon_code' %}",
+            data: {
+                cupon: cuponCode,
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+                action: "post",
+            },
+            success: function (json) {
+                if (json.new_sum !== undefined) {
+                    $("#sum").text(json.new_sum);
+                    $("#error").text('')// Clear any previous error
+                    $("#success_text").text(`${json.percetage}% sale has applied`);  
+                }
+            },
+            error: function (xhr, errmsg, err) {
+                if (xhr.responseJSON && xhr.responseJSON.error_text) {
+                    $("#success_text").text('')// Clear any previous text
+                    $("#error").text(xhr.responseJSON.error_text);
+                } else {
+                    $("#error").text('An error occurred');
+                }
+            },
+        });
+    });
+</script>
 {% endblock %}

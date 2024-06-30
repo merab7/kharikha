@@ -70,5 +70,14 @@ class Order_item(models.Model):
 
 
 
+class CuponCode(models.Model):
+    code =  models.CharField(max_length=7, blank=False, null=False)
+    date_creted = models.DateTimeField(default=datetime.datetime.now, auto_created=True)
+    sale_percentage = models.IntegerField(default=0, blank=False)
+
+    def __str__(self) -> str:
+      return f'Order Item -- {str(self.code)}'
+
+
 
 
