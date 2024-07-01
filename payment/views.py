@@ -10,8 +10,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import formataddr
+from payment.models import CuponCode
 import environ
-
 env = environ.Env()
 environ.Env.read_env()
 
@@ -179,8 +179,8 @@ def proc_order(request):
                         }
                         sum_order.append(sum_item)
 
-            EMAIL = env('EXCAVATIO')
-            EXCAVATIOPASS = env('EXCAVATIOPASS')
+            EMAIL = env('MY_EMAIL')
+            EXCAVATIOPASS = env('EMAIL_PASSWORD')
             message_content = f"Here is your order:\n" + "\n".join([f"n{x['em_name']}\n Price: ₾ {x['em_price']} \n Size: {x['em_size']} \n Quantity: {x['em_quantity']}" for x in sum_order])
             content = {'order_num': f"Order number: {order.pk}", 'message': message_content, 'sum': total_paid, 'shipping_address':shipping_address}
 
@@ -206,6 +206,17 @@ def proc_order(request):
                     del request.session[key]
 
             messages.success(request, "Order Placed")
+            # delet cupon code form db
+            entered_code = request.session['cupon']
+            codes_in_db = CuponCode.objects.filter(code=entered_code)
+
+            if codes_in_db.exists():
+                #deleting cupon_code from database after successfull checkout
+                codes_in_db[0].delete()
+
+
+
+            # redirect to gome
             return redirect('home')
         else:
             messages.error(request, "Shipping information is missing.")

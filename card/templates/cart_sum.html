@@ -280,7 +280,8 @@
                 if (json.new_sum !== undefined) {
                     $("#sum").text(json.new_sum);
                     $("#error").text('')// Clear any previous error
-                    $("#success_text").text(`${json.percetage}% sale has applied`);  
+                    $("#success_text").text(`${json.percetage}% sale has applied`);
+                    document.getElementById("cupon").disabled=true;
                 }
             },
             error: function (xhr, errmsg, err) {

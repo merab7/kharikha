@@ -1,6 +1,3 @@
-import json
-from os import error
-from urllib import response
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .cart import Cart
@@ -116,11 +113,12 @@ def cupon_code(request):
         codes_in_db = CuponCode.objects.filter(code=entered_code)
 
         if codes_in_db.exists():
+            #adding cupon to a session for to after seccessful chekout delete it form db
+            request.session['cupon'] = codes_in_db[0].code
             new_sum = sum(prices) - ((sum(prices) * codes_in_db[0].sale_percentage) / 100)
 
             response = JsonResponse({'new_sum': new_sum, 'percetage':codes_in_db[0].sale_percentage})
-            #deleting code from database after use
-            codes_in_db[0].delete()
+
         else:
             response = JsonResponse({'error_text': 'Coupon code is not valid'}, status=400)
 
