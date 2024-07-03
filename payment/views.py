@@ -2,15 +2,11 @@ from django.shortcuts import render, redirect
 from card.cart import Cart
 from .models import ShippingAddress, Order, Order_item
 from .forms import ShippingInfo, PaymentForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib import messages
-from store.models import ProductSize, Product
+from store.models import ProductSize
 import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.utils import formataddr
 from payment.models import CuponCode
+from payment.email_utils import send_order_confirmation
 import environ
 env = environ.Env()
 environ.Env.read_env()
@@ -181,18 +177,12 @@ def proc_order(request):
 
             EMAIL = env('MY_EMAIL')
             EXCAVATIOPASS = env('EMAIL_PASSWORD')
-            message_content = f"Here is your order:\n" + "\n".join([f"n{x['em_name']}\n Price: ₾ {x['em_price']} \n Size: {x['em_size']} \n Quantity: {x['em_quantity']}" for x in sum_order])
-            content = {'order_num': f"Order number: {order.pk}", 'message': message_content, 'sum': total_paid, 'shipping_address':shipping_address}
+            content = {'order_num': f"Order number: {order.pk}",  'sum': total_paid, 'shipping_address':shipping_address}
 
             # Create the email message
-            msg = MIMEMultipart()
-            msg['From'] = formataddr(('Ecomge', EMAIL))
-            msg['To'] = email
-            msg['Subject'] = 'Your order confirmation'
-
-            body = f"{content['order_num']}\n{content['message']}\nTotal Paid: {content['sum']}\nShipping address: {content['shipping_address']}"
-            msg.attach(MIMEText(body, 'plain', 'utf-8'))
-
+            
+            msg = send_order_confirmation(email, content, EMAIL, sum_order)
+ 
             # Send the email
             with smtplib.SMTP('smtp.gmail.com', 587) as mail:
                 mail.ehlo()
@@ -206,13 +196,19 @@ def proc_order(request):
                     del request.session[key]
 
             messages.success(request, "Order Placed")
-            # delet cupon code form db
-            entered_code = request.session['cupon']
-            codes_in_db = CuponCode.objects.filter(code=entered_code)
 
-            if codes_in_db.exists():
-                #deleting cupon_code from database after successfull checkout
-                codes_in_db[0].delete()
+
+            # delet cupon code form db
+            if request.session['cupon']:
+                entered_code = request.session['cupon']
+                codes_in_db = CuponCode.objects.filter(code=entered_code)
+
+                if codes_in_db.exists():
+
+                    order.cupon_used=f"{codes_in_db[0].sale_percentage}% code was used. code is:{codes_in_db[0].code}"
+                    #deleting cupon_code from database after successfull checkout
+                    codes_in_db[0].delete()
+                
 
 
 

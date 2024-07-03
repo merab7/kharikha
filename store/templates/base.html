@@ -80,35 +80,26 @@
     <!-- Start header -->
     <header>
       <nav
-        class="bg-base-color navbar navbar-expand-md header-light center-logo d-flex justify-content-center"
+        class="bg-base-color navbar navbar-expand-md header-light p-1 "
       >
-        <div class="container-fluid">
-          <div>
-            <a class="navbar-brand" href="{% url 'home' %}">
-              <img
-                src="{% static 'images/logo.jpg' %}"
-                data-at2x="{% static 'images/kha.jpg' %}"
-                alt="Logo"
-                class="default-logo"
-              />
-            </a>
-          </div>
-          <div class="col-xxl-6 col-lg-8 menu-order">
-            <button
-              class="navbar-toggler float-end"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-line"></span>
-              <span class="navbar-toggler-line"></span>
-              <span class="navbar-toggler-line"></span>
-              <span class="navbar-toggler-line"></span>
-            </button>
+        <div class="container-fluid ">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-line"></span>
+            <span class="navbar-toggler-line"></span>
+            <span class="navbar-toggler-line"></span>
+            <span class="navbar-toggler-line"></span>
+          </button>
+
+          <div >
             <div
-              class="collapse navbar-collapse justify-content-between"
+              class="collapse navbar-collapse "
               id="navbarNav"
             >
               <ul
@@ -116,66 +107,108 @@
               >
                 <li class="nav-item">
                   <a
-                    class="nav-link active"
+                    class="nav-link active fs-4"
                     aria-current="page"
                     href="{% url 'home' %}"
+                    >{% trans "Home" %}</a
                   >
-                    {% trans "Home" %}
-                  </a>
                 </li>
                 <!-- this links appears only when user is home page -->
                 {% if request.resolver_match.url_name == 'home' %}
                 <li class="nav-item">
-                  <a class="nav-link" href="#categories-section">Categories</a>
+                  <a class="nav-link fs-4" href="#categories-section"
+                    >Categories</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#products-section">Products</a>
+                  <a class="nav-link fs-4" href="#products-section">Products</a>
                 </li>
                 {% endif %}
               </ul>
             </div>
           </div>
-          <div class="col-auto col-xxl-3 col-lg-2 text-start">
-            <div class="header-icon">
+          <div >
+            <div class="header-icon ">
+              <div>
+                <a
+                  href="{% url 'cart_sum' %}"
+                  class="btn cart-link d-flex align-items-center"
+                >
+                  <i class="bi-cart-fill me-1 fs-4 "></i>
+                  <span
+                    class="badge bg-dark text-white ms-1 fs-6 rounded-pill"
+                    id="cart_count"
+                  >
+                    {{ cart|length }}
+                  </span>
+                </a>
+              </div>
+   
+
+
+
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <div class="mt-8">
               {% if user.is_authenticated %}
               <div class="widget-text icon alt-font">
                 <a href="{% url 'profile' %}">
-                  <i class="fas fa-user d-inline-block me-5px"></i>
-                  <span class="d-none d-xxl-inline-block">
+                  <i class="fas fa-user d-inline-block fs-5 me-5px"></i>
+                  <span class="d-none d-xxl-inline-block fs-5">
                     {% trans "Account" %}
                   </span>
                 </a>
               </div>
               {% endif %}
-              <a
-                href="{% url 'cart_sum' %}"
-                class="btn cart-link d-flex align-items-center"
-              >
-                <i class="bi-cart-fill me-1"></i>
-                <span
-                  class="badge bg-dark text-white ms-1 rounded-pill"
-                  id="cart_count"
-                >
-                  {{ cart|length }}
-                </span>
-              </a>
-              {% if not user.is_authenticated %}
-              <a href="{% url 'login' %}" class="btn"> {% trans "Login" %} </a>
-              {% else %}
-              <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button class="btn" type="submit">{% trans "Logout" %}</button>
-              </form>
-              {% endif %}
             </div>
+            <div class="mt-6">
+              <ul>
+                <li class="nav-item dropdown ">
+                  <button
+                    class="btn dropdown-toggle fs-5"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {% trans "EN" %}
+                  </button>
+                  <ul class="dropdown-menu   text-center ">
+                    <li>
+                      <a href="{% url 'set_language' 'en' %}"
+                        >{% trans "English" %}</a
+                      >
+                    </li>
+                    <li>
+                      <a href="{% url 'set_language' 'ka' %}"
+                        >{% trans "ქართული" %}</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              
+            </div>
+            <div class="mt-7">
+            {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}" class="btn"> <i class="fa-solid fa-right-from-bracket fs-6">Login</i></a>
+            {% else %}
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button class="btn" type="submit"><i class="fa-solid fa-right-from-bracket fs-6">Logout</i></button>
+            </form>
+            {% endif %}
+          </div>
           </div>
         </div>
+
       </nav>
     </header>
 
     <!-- Messages -->
     {% if messages %}
-    <div class="container mt-5 pt-3">
+    <div class="container-fluid mt-5 pt-3 position-absolute">
       {% for message in messages %}
       <div
         class="alert alert-{{ message.tags }} alert-dismissible fade show"
@@ -207,12 +240,14 @@
 
     <!-- Smooth Scroll Script -->
     <script>
-      document.querySelectorAll('a.nav-link[href^="#"]').forEach((anchor) => {
+      document.querySelectorAll("a.nav-link[href^='#']").forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
           document.querySelector(this.getAttribute("href")).scrollIntoView({
             behavior: "smooth",
           });
+          // Close the navbar-collapse when a link is clicked
+          document.querySelector(".navbar-collapse").classList.remove("show");
         });
       });
     </script>
