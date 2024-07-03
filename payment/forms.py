@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 class ShippingInfo(forms.ModelForm):
     fullname = forms.CharField(label=_("Fullname"), widget=forms.TextInput(attrs={'class':'form_control', 'placeholder':'Full Name' }), required=True)
-    email = forms.CharField(label=_("Email"), widget=forms.TextInput(attrs={'class':'form_control', 'placeholder': 'Email' }), required=True)
+    email = forms.EmailField(label=_("Email"), required=True)
     address = forms.CharField(label=_("Address"), widget=forms.TextInput(attrs={'class':'form_control', 'placeholder': 'Address' }), required=True)
     city = forms.CharField(label=_("City"), widget=forms.TextInput(attrs={'class':'form_control', 'placeholder': 'City' }), required=True)
     zipcode = forms.CharField(label=_("Zip"), widget=forms.TextInput(attrs={'class':'form_control', 'placeholder': 'Zipcode' }), required=False)

@@ -159,8 +159,12 @@ def proc_order(request):
                         #updating products database after successful purchase
                         for x in ProductSize.objects.all():
                             if x.product == product_item and x.size == size:
-                                x.quantity = x.quantity - quantity
-                                x.save()
+                                curent_qu = x.quantity
+                                x.quantity = curent_qu - quantity
+                                x.save()                               
+                                
+                                     
+                                    
 
             # Send purchase confirmation email to the customer
             sum_order = []
@@ -205,9 +209,12 @@ def proc_order(request):
 
                 if codes_in_db.exists():
 
-                    order.cupon_used=f"{codes_in_db[0].sale_percentage}% code was used. code is:{codes_in_db[0].code}"
+                    order.cupon_used = f"{codes_in_db[0].sale_percentage}% code was used. code is:{codes_in_db[0].code}"
+                    order.save()
+
                     #deleting cupon_code from database after successfull checkout
-                    codes_in_db[0].delete()
+                    #for now we are not deleting it and alwo user to use it meny times
+                    #codes_in_db[0].delete()
                 
 
 
