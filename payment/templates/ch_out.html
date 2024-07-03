@@ -26,8 +26,11 @@
           {% endif %}
           <h6 class="card-text">{% trans "Size" %}: {{ item.size }}</h6>
           <h6 class="card-text">{% trans "Quantity" %}: {{ item.quantity }}</h6>
+          
         </div>
         {% endif %} {% endfor %} {% endfor %}
+        <h6 class="card-text p-2 text-red">{% trans "Cupon Code" %}: {{ cupon_code }}</h6>
+        
         <div class="container p-2 text-success">
           <h5>{% trans "Sum" %}: ₾{{summary}}</h5>
         </div>

@@ -223,14 +223,13 @@
                     <small class="text-red">Card-coming soon!</small>
                     <li class="d-flex align-items-center">
                       <input
-                        id="local_pickup"
+                        id="at_address"
                         type="radio"
                         name="shipping-option"
                         class="d-block w-auto mb-0 me-10px p-0"
+                        onclick="payAtAddress()"
                       />
-                      <label class="md-line-height-18px" for="local_pickup"
-                        >{% trans "pay at address" %}</label
-                      >
+                      <label class="md-line-height-18px" for="at_address">{% trans "pay at address" %}</label>
                     </li>
                   </ul>
                 </td>
@@ -248,18 +247,15 @@
               </tr>
             </tbody>
           </table>
-          <a
-            href="{% url 'ch_out' %}"
-            class="btn btn-dark-gray btn-large btn-switch-text btn-round-edge btn-box-shadow w-100 mt-25px"
-          >
-            <span>
-              <span
-                class="btn-double-text"
-                data-text="{% trans 'Proceed to checkout' %}"
-                >{% trans 'Proceed to checkout' %}</span
-              >
-            </span>
-          </a>
+          <a href="{% url 'ch_out' %}"
+          class="btn btn-dark-gray btn-large btn-switch-text btn-round-edge btn-box-shadow w-100 mt-25px"
+          onclick="return validatePaymentChoice();">
+         <span>
+           <span class="btn-double-text" data-text="{% trans 'Proceed to checkout' %}">
+             {% trans 'Proceed to checkout' %}
+           </span>
+         </span>
+       </a>
         </div>
       </div>
     </div>
@@ -268,11 +264,13 @@
 <script>
     $("#apply").click(function () {
         var cuponCode = $("#cupon").val();
+        var at_address = $("#at_address").val()
         $.ajax({
             type: "POST",
             url: "{% url 'cupon_code' %}",
             data: {
                 cupon: cuponCode,
+                pay_methode: at_address,
                 csrfmiddlewaretoken: "{{ csrf_token }}",
                 action: "post",
             },
@@ -294,5 +292,35 @@
             },
         });
     });
+
+    function payAtAddress() {
+    $.ajax({
+      url: "{% url 'pay_at_address' %}",
+      type: "GET",
+      data: {
+        'csrfmiddlewaretoken': '{{ csrf_token }}',  // include CSRF token for security
+        // sending paymenth option as at_address and thsi function being activated from above html part
+        'shipping_option': 'at_address'
+      },
+      success: function(response) {
+        // Handle success response
+       
+      },
+      error: function(xhr, status, error) {
+        // Handle error response
+        alert("An error occurred: " + error);
+      }
+    });
+  }
+  // checking if the at_address is selected if it is not user shoudl nmot be able to continue shoping (after card pay is implemented)
+  // i should add or...
+  function validatePaymentChoice() {
+    // Check if the payment choice (pay at address) is selected
+    if (!$("#at_address").is(":checked")) {
+      alert("Please select a payment method before proceeding.");
+      return false; // Prevent the default action (checkout redirection)
+    }
+    return true; // Proceed to checkout
+  }
 </script>
 {% endblock %}

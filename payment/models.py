@@ -39,6 +39,7 @@ class Order(models.Model):
      phone = models.CharField(max_length=200)
      per_id = models.CharField(max_length=200, null=True)
      cupon_used = models.CharField(max_length=200, default="Cupon code was not used", null=True)
+     payment_methode = models.CharField(max_length=200, null=True)
      shipped = models.BooleanField(default=False)
      shipped_date = models.DateTimeField(blank=True, null=True)
 

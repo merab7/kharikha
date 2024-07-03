@@ -4,6 +4,7 @@ from .cart import Cart
 from store.models import Product, ProductSize
 from django.http import JsonResponse
 from payment.models import CuponCode
+from django.views.decorators.http import require_http_methods
 
 
 def cart_sum(request):
@@ -107,7 +108,13 @@ def cupon_code(request):
                      else:
                          prices.append(product.price * item['quantity'])
     
-    if request.POST.get('action') == 'post':   
+    if request.POST.get('action') == 'post':  
+
+        #add pay_method to a session
+        pay_methode =  request.POST.get('pay_methode')
+        print(pay_methode)
+        request.session['pay_methode'] = pay_methode
+
 
         entered_code = request.POST.get('cupon')
         codes_in_db = CuponCode.objects.filter(code=entered_code)
@@ -116,6 +123,10 @@ def cupon_code(request):
             #adding cupon to a session for to after seccessful chekout delete it form db
             request.session['cupon'] = codes_in_db[0].code
             new_sum = sum(prices) - ((sum(prices) * codes_in_db[0].sale_percentage) / 100)
+            print(new_sum)
+
+            #adding new_sum for order summary section to the session
+            request.session['new_sum'] = str(new_sum)
 
             response = JsonResponse({'new_sum': new_sum, 'percetage':codes_in_db[0].sale_percentage})
 
@@ -123,6 +134,23 @@ def cupon_code(request):
             response = JsonResponse({'error_text': 'Coupon code is not valid'}, status=400)
 
         return response
+
+
+# add pay emthod to the session 
+@require_http_methods(["GET"])
+def pay_at_address(request):
+
+    option = request.GET.get('shipping_option')
+       # Handle the request data
+
+
+
+    #adding payment method to the session
+    request.session['pay_methode'] = option
+
+    return JsonResponse({'status': 'success'})
+
+
 
 
         

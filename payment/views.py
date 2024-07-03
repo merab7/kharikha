@@ -56,7 +56,14 @@ def checkout(request):
         'quantities': quantities,
         'summary': sum(prices),
         'shipping_info': shippingInfo_form,
+        'cupon_code': ''
     }
+
+        #cehcking is prices is cahnged because of cupon code and updating new sum price at order summary
+    if request.session['cupon']:
+            context['summary'] = request.session['new_sum']
+            context['cupon_code'] = request.session['cupon']
+
     if cart_products:
         return render(request, 'ch_out.html', context)
     else:
@@ -92,8 +99,16 @@ def billing(request):
             'quantities': quantities,
             'summary': sum(prices),
             'shipping_sum': shipping_sum,
-            'billing_form': billing_form
+            'billing_form': billing_form,
+            'cupon_code': ''
         }
+
+        #cehcking is prices is cahnged because of cupon code and updating new sum price at order summary
+        if request.session['cupon']:
+            context['summary'] = request.session['new_sum']
+            context['cupon_code'] = request.session['cupon']
+
+
         return render(request, 'billing.html', context)
     else:
         return redirect('home')
@@ -120,8 +135,8 @@ def proc_order(request):
                     else:
                         prices.append(product.price * item['quantity'])
 
-    if request.method == 'POST':
-        payment_form = PaymentForm(request.POST)
+    if request.session['pay_methode'] == 'at_address':   
+
         my_shipping = request.session.get('my_shippInfo', None)
         
         if request.user.is_authenticated:
@@ -202,6 +217,12 @@ def proc_order(request):
             messages.success(request, "Order Placed")
 
 
+            #update payment mehtod in the order
+            pay_method = request.session['pay_methode']
+            order.payment_methode = pay_method
+            order.save()
+
+
             # delet cupon code form db
             if request.session['cupon']:
                 entered_code = request.session['cupon']
@@ -224,6 +245,8 @@ def proc_order(request):
         else:
             messages.error(request, "Shipping information is missing.")
             return redirect('checkout')
+    
+    # after implementing card payment i should update this part 
     else:
         return redirect('home')
     
