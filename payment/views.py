@@ -194,6 +194,10 @@ def proc_order(request):
                         }
                         sum_order.append(sum_item)
 
+            #changing totalpaid for email if therew is  a cuponcode
+            if request.session['new_sum']:
+                total_paid =  request.session['new_sum']           
+
             EMAIL = env('MY_EMAIL')
             EXCAVATIOPASS = env('EMAIL_PASSWORD')
             content = {'order_num': f"Order number: {order.pk}",  'sum': total_paid, 'shipping_address':shipping_address}
@@ -230,6 +234,7 @@ def proc_order(request):
 
                 if codes_in_db.exists():
 
+                    order.total_paid_amount = request.session['new_sum']
                     order.cupon_used = f"{codes_in_db[0].sale_percentage}% code was used. code is:{codes_in_db[0].code}"
                     order.save()
 
