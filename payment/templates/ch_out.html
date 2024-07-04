@@ -48,7 +48,7 @@
             enctype="multipart/form-data"
           >
             {% csrf_token %}
-            <legend class="border-bottom mb-4">
+            <legend class="border-bottom mb-4 ">
               <h3>{% trans "Shipping Info" %}</h3>
             </legend>
             {{ shipping_info|crispy }}

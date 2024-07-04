@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %} {% load i18n %}
+{% extends 'base.html' %}
+{% block content %}
+{% load i18n %}
 
 <div class="container mt-5 p-3 p-md-5">
   <div class="row product-row">
@@ -15,19 +17,19 @@
             data-bs-slide-to="0"
             class="active"
             aria-current="true"
-            aria-label="Slide 1"
+            aria-label="{% trans 'Slide 1' %}"
           ></button>
           <button
             type="button"
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide-to="1"
-            aria-label="Slide 2"
+            aria-label="{% trans 'Slide 2' %}"
           ></button>
           <button
             type="button"
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide-to="2"
-            aria-label="Slide 3"
+            aria-label="{% trans 'Slide 3' %}"
           ></button>
         </div>
         <div class="carousel-inner">
@@ -35,21 +37,21 @@
             <img
               class="d-block w-100 carousel-image"
               src="{{ product.image.url }}"
-              alt="Slide 1"
+              alt="{% trans 'Slide 1' %}"
             />
           </div>
           <div class="carousel-item">
             <img
               class="d-block w-100 carousel-image"
               src="{{ product.model_image_1.url }}"
-              alt="Slide 2"
+              alt="{% trans 'Slide 2' %}"
             />
           </div>
           <div class="carousel-item">
             <img
               class="d-block w-100 carousel-image"
               src="{{ product.model_image_2.url }}"
-              alt="Slide 3"
+              alt="{% trans 'Slide 3' %}"
             />
           </div>
         </div>
@@ -60,7 +62,7 @@
           data-bs-slide="prev"
         >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">{% trans "Previous" %}</span>
+          <span class="visually-hidden">{% trans 'Previous' %}</span>
         </button>
         <button
           class="carousel-control-next"
@@ -69,14 +71,14 @@
           data-bs-slide="next"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">{% trans "Next" %}</span>
+          <span class="visually-hidden">{% trans 'Next' %}</span>
         </button>
       </div>
     </div>
 
     <div class="col-md-6">
       <div class="product-info">
-        <span class="fw-500 text-dark-gray d-block">ხარიხა-KHarikha</span>
+        <span class="fw-500 text-dark-gray d-block">{% blocktrans %}ხარიხა-KHarikha{% endblocktrans %}</span>
         <h4 class="alt-font text-dark-gray fw-500 mb-5px">
           {% trans product.name %}
         </h4>
@@ -131,7 +133,7 @@
               type="text"
               id="quantity"
               value="1"
-              aria-label="submit"
+              aria-label="{% trans 'submit' %}"
               readonly
             />
             <button type="button" class="qty-plus" id="increment">+</button>
@@ -172,9 +174,9 @@
       } else {
         $("#add-to-cart").prop("disabled", true);
         if (!isValidSize) {
-          $("#validation-message").text("Please select a valid size.");
+          $("#validation-message").text("{% trans 'Please select a valid size.' %}");
         } else if (!isQuantityValid) {
-          $("#validation-message").text("Please enter a valid quantity.");
+          $("#validation-message").text("{% trans 'Please enter a valid quantity.' %}");
         }
       }
     }

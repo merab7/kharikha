@@ -35,11 +35,11 @@
     </div>
 
     <!-- Shipping Info Section -->
-    <div class="col-12 col-md-5 mb-5">
+    <div class="col-10 col-md-6 mb-5">
       <div class="card h-100">
         <div class="d-flex justify-content-between card-header">
-          <h5>Shipping Info</h5>
-          <a href="{% url 'ch_out' %}">Edit</a>
+          <h5>{% trans "Shipping Info" %}</h5>
+          <a  href="{% url 'ch_out' %}">{% trans "Edit" %}</a>
         </div>
         <div class="card-body border-bottom">
           {% for key, value in shipping_sum.items %}
@@ -54,7 +54,7 @@
   <!-- Billing Info Form Section -->
    <!-- if at address -->
     <div class="row justify-content-center">
-      <a href="{% url 'proc_order'  %}" class="btn btn-info" >Make Order</a>
+      <a href="{% url 'proc_order'  %}" class="btn btn-info" >{% trans "Make Order" %}</a>
     </div>
   <!-- if paying with card -->
   <!-- <div class="row justify-content-center mb-5">

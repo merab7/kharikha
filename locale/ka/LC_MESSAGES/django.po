@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 22:30+0200\n"
+"POT-Creation-Date: 2024-07-04 20:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,412 +18,531 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: card/templates/cart_sum.html:13 card/templates/cart_sum.html:21
+#: card/templates/cart_sum.html:11 card/templates/cart_sum.html:17
 msgid "Shopping cart"
-msgstr ""
+msgstr "შესყიდვის კალათა"
 
-#: card/templates/cart_sum.html:20 store/templates/base.html:123
+#: card/templates/cart_sum.html:16 store/templates/base.html:113
 msgid "Home"
-msgstr ""
+msgstr "მთავარი"
 
-#: card/templates/cart_sum.html:40
+#: card/templates/cart_sum.html:36
 msgid "Product"
-msgstr ""
+msgstr "პროდუქტი"
 
-#: card/templates/cart_sum.html:44 card/templates/cart_sum.html:87
+#: card/templates/cart_sum.html:40 card/templates/cart_sum.html:68
 #: payment/templates/billing.html:20 payment/templates/billing.html:23
 #: payment/templates/ch_out.html:22 payment/templates/ch_out.html:25
 msgid "Price"
-msgstr ""
+msgstr "ფასი"
 
-#: card/templates/cart_sum.html:47 card/templates/cart_sum.html:94
+#: card/templates/cart_sum.html:43 card/templates/cart_sum.html:72
 #: payment/templates/billing.html:26 payment/templates/ch_out.html:28
 msgid "Quantity"
-msgstr ""
+msgstr "რაოდენობა"
 
-#: card/templates/cart_sum.html:84 payment/templates/billing.html:25
-#: payment/templates/ch_out.html:27 store/templates/details.html:99
+#: card/templates/cart_sum.html:66 payment/templates/billing.html:25
+#: payment/templates/ch_out.html:27 store/templates/details.html:101
 msgid "Size"
-msgstr ""
+msgstr "ზომა"
 
-#: card/templates/cart_sum.html:127
+#: card/templates/cart_sum.html:78 payment/templates/billing.html:12
+#: payment/templates/billing.html:42 payment/templates/ch_out.html:11
+msgid "Edit"
+msgstr "რედაქტირება"
+
+#: card/templates/cart_sum.html:88
 msgid "Confirm Delete"
-msgstr ""
+msgstr "წაშალების დადასტურება"
+
+#: card/templates/cart_sum.html:92
+msgid "Are you sure you want to delete"
+msgstr "დარწმუნებული ხართ რომ გნებვთ წაშლა"
+
+#: card/templates/cart_sum.html:95
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#: card/templates/cart_sum.html:96
+msgid "Yes, Delete"
+msgstr "დიახ"
+
+#: card/templates/cart_sum.html:108
+msgid "Coupon code"
+msgstr "კუპონის კოდი"
+
+#: card/templates/cart_sum.html:109
+msgid "Apply"
+msgstr "გამოყენება"
+
+#: card/templates/cart_sum.html:124
+msgid "your cart is empty!"
+msgstr "თქვენი კალათა ცარიელია!"
+
+#: card/templates/cart_sum.html:132
+msgid "Cart totals"
+msgstr "კალათის ჯამი"
 
 #: card/templates/cart_sum.html:137
-msgid "Are you sure you want to delete"
-msgstr ""
-
-#: card/templates/cart_sum.html:147
-msgid "Cancel"
-msgstr ""
-
-#: card/templates/cart_sum.html:152
-msgid "Yes, Delete"
-msgstr ""
-
-#: card/templates/cart_sum.html:168
-msgid "Coupon code"
-msgstr ""
-
-#: card/templates/cart_sum.html:175
-msgid "Apply"
-msgstr ""
-
-#: card/templates/cart_sum.html:184
-msgid "your cart is empty!"
-msgstr ""
-
-#: card/templates/cart_sum.html:195
-msgid "Cart totals"
-msgstr ""
-
-#: card/templates/cart_sum.html:201
-msgid "Subtotal"
-msgstr ""
-
-#: card/templates/cart_sum.html:207
 msgid "Method"
-msgstr ""
+msgstr "მეთოდი"
 
-#: card/templates/cart_sum.html:209
+#: card/templates/cart_sum.html:138
 msgid "Shipping"
-msgstr ""
+msgstr "მიწოდება"
 
-#: card/templates/cart_sum.html:220
+#: card/templates/cart_sum.html:149
 msgid "with card"
-msgstr ""
+msgstr "ბარათით"
 
-#: card/templates/cart_sum.html:232
+#: card/templates/cart_sum.html:154
+msgid "Card: coming soon"
+msgstr "ბარათი: მალე დაემატება"
+
+#: card/templates/cart_sum.html:158
 msgid "pay at address"
-msgstr ""
+msgstr "გადახდა მისამართზე"
 
-#: card/templates/cart_sum.html:241 card/templates/cart_sum.html:243
+#: card/templates/cart_sum.html:165 card/templates/cart_sum.html:166
 msgid "Total"
-msgstr ""
+msgstr "სულ"
 
-#: card/templates/cart_sum.html:258 card/templates/cart_sum.html:259
+#: card/templates/cart_sum.html:176
 msgid "Proceed to checkout"
-msgstr ""
+msgstr "გადახდაზე გადასვლა"
 
-#: card/templates/edit.html:63 store/templates/details.html:63
+#: card/templates/cart_sum.html:245
+msgid "Please select a payment method before proceeding."
+msgstr "გთხოვთ აირჩიოთ გადახდის მეთოდი"
+
+#: card/templates/edit.html:63 store/templates/details.html:65
 msgid "Previous"
-msgstr ""
+msgstr "წინა"
 
-#: card/templates/edit.html:72 store/templates/details.html:72
+#: card/templates/edit.html:72 store/templates/details.html:74
 msgid "Next"
-msgstr ""
+msgstr "შემდეგი"
 
-#: card/templates/edit.html:108 store/templates/details.html:121
+#: card/templates/edit.html:108 store/templates/details.html:123
 msgid "Available"
-msgstr ""
+msgstr "ხელმისაწვდომი"
 
 #: card/templates/edit.html:133 customers/templates/profile.html:41
 #: customers/templates/profile.html:60
 msgid "Update"
-msgstr ""
+msgstr "განახლება"
 
 #: card/templates/edit.html:162
 msgid "Please choose the right size"
-msgstr ""
+msgstr "გთხოვთ, აირჩიეთ სწორი ზომა"
 
 #: card/templates/edit.html:166
 msgid "Please choose the right quantity"
-msgstr ""
+msgstr "გთხოვთ, აირჩიეთ სწორი რაოდენობა"
 
 #: customers/forms.py:14
 msgid "username"
-msgstr ""
+msgstr "მომხმარებელი"
 
 #: customers/forms.py:15
 msgid "email"
-msgstr ""
+msgstr "ელ-ფოსტა"
 
 #: customers/forms.py:16
 msgid "first name"
-msgstr ""
+msgstr "სახელი"
 
 #: customers/forms.py:17
 msgid "last name"
-msgstr ""
+msgstr "გვარი"
 
 #: customers/forms.py:18
 msgid "address"
-msgstr ""
+msgstr "მისამართი"
 
 #: customers/forms.py:19
 msgid "city"
-msgstr ""
+msgstr "ქალაქი"
 
 #: customers/forms.py:20 payment/forms.py:13
 msgid "Phone"
-msgstr ""
+msgstr "ტელეფონი"
 
 #: customers/forms.py:21
 msgid "zipcode"
-msgstr ""
+msgstr "საფოსტო კოდი"
+
+#: customers/templates/account_activation_sent.html:9
+msgid "Activation link has been sent to your email address."
+msgstr "ვერიფიკაციისთვის ლინკი გამოგეგზავნათ იმეილზე"
+
+#: customers/templates/activation_sent.html:10
+#, fuzzy
+#| msgid "Activation link has been sent to your email address."
+msgid "Activation link sent! Please check your mail."
+msgstr "ვერიფიკაციისთვის ლინკი გამოგეგზავნათ იმეილზე"
 
 #: customers/templates/logout.html:7
 msgid "You have been logged out"
-msgstr ""
+msgstr "თქვენ გამოხვედით"
 
 #: customers/templates/logout.html:8
 msgid "Thanks for visiting. See you again soon!"
-msgstr ""
+msgstr "მადლობა მომსახურებისთვის. გიხდით კიდევ მალე!"
 
 #: customers/templates/logout.html:10
 msgid "Log In Again"
-msgstr ""
+msgstr "ხელახლა შესვლა"
 
 #: customers/templates/my_orders.html:7
 msgid "Orders"
-msgstr ""
+msgstr "შეკვეთები"
 
 #: customers/templates/my_orders.html:10
 msgid "With this shop homepage template"
-msgstr ""
+msgstr "ამ მაღაზიის მთავარი გვერდის შაბლონით"
 
 #: customers/templates/my_orders.html:18
 msgid "My Orders"
-msgstr ""
+msgstr "ჩემი შეკვეთები"
 
 #: customers/templates/my_orders.html:22
 msgid "Order ID"
-msgstr ""
+msgstr "შეკვეთის ID"
 
 #: customers/templates/my_orders.html:23
 msgid "Date"
-msgstr ""
+msgstr "თარიღი"
 
 #: customers/templates/my_orders.html:24
 msgid "Status"
-msgstr ""
+msgstr "სტატუსი"
 
 #: customers/templates/my_orders.html:25
 msgid "Order Description"
-msgstr ""
+msgstr "შეკვეთის აღწერა"
 
 #: customers/templates/my_orders.html:34
 msgid "Shipped"
-msgstr ""
+msgstr "გაგზავნილია"
 
 #: customers/templates/my_orders.html:36
 msgid "Pending"
-msgstr ""
+msgstr "მოლოდინშია"
 
 #: customers/templates/my_orders.html:58 store/templates/categories.html:78
 #: store/templates/home.html:147
 msgid "first"
-msgstr ""
+msgstr "პირველი"
 
 #: customers/templates/my_orders.html:60
 msgid "previous"
-msgstr ""
+msgstr "წინა"
 
 #: customers/templates/my_orders.html:65
 msgid "Page"
-msgstr ""
+msgstr "გვერდი"
 
 #: customers/templates/my_orders.html:65
 msgid "of"
-msgstr ""
+msgstr "/"
 
 #: customers/templates/password_reset_done.html:8
 msgid "Your Password has been set. You may go ahead and login"
-msgstr ""
+msgstr "თქვენი პაროლი დაყენებულია. შეგიძლიათ შედით და შეხვიდეთ"
 
 #: customers/templates/password_reset_done.html:13
 #: customers/templates/registration/login.html:8
-#: customers/templates/registration/login.html:36 store/templates/base.html:166
+#: customers/templates/registration/login.html:36 store/templates/base.html:194
 msgid "Login"
-msgstr ""
+msgstr "შესვლა"
 
 #: customers/templates/password_reset_form.html:19
 msgid "Please enter your new password so we can verify."
-msgstr ""
+msgstr "გთხოვთ, შეიყვანოთ თქვენი ახალი პაროლი, რათა ვამოწმოთ."
 
 #: customers/templates/password_reset_form.html:27
 msgid "Reset Password"
-msgstr ""
+msgstr "პაროლის აღდგენა"
 
 #: customers/templates/password_reset_sent.html:9
 msgid "We’ve emailed you instructions for setting your password"
-msgstr ""
+msgstr "გადაგზავნეთ ინსტრუქციები პაროლის დაყენებისთვის"
 
 #: customers/templates/password_reset_sent.html:16
 #: customers/templates/reset_password.html:25
 msgid "Return to Home Page"
-msgstr ""
+msgstr "დაბრუნდით მთავარ გვერდზე"
 
 #: customers/templates/profile.html:30
 msgid "MY ORDERS"
-msgstr ""
+msgstr "ჩემი შეკვეთები"
 
 #: customers/templates/profile.html:37
 msgid "Profile Info"
-msgstr ""
+msgstr "პროფილის ინფორმაცია"
 
 #: customers/templates/profile.html:44
 msgid "Update your password"
-msgstr ""
+msgstr "განახლება პაროლის"
 
-#: customers/templates/profile.html:55 payment/templates/ch_out.html:40
-#: payment/templates/ch_out.html:49
+#: customers/templates/profile.html:55 payment/templates/billing.html:41
+#: payment/templates/ch_out.html:43 payment/templates/ch_out.html:52
 msgid "Shipping Info"
-msgstr ""
+msgstr "მიწოდების ინფორმაცია"
 
 #: customers/templates/registration/login.html:42
 msgid "Don't have an account?"
-msgstr ""
+msgstr "არ გაქვთ ანგარიში?"
 
 #: customers/templates/registration/login.html:43
 msgid "Register"
-msgstr ""
+msgstr "რეგისტრაცია"
 
 #: customers/templates/registration/login.html:49
 msgid "Forgot password?"
-msgstr ""
+msgstr "დაგავიწყდა პაროლი?"
 
 #: customers/templates/registration/login.html:50
 msgid "Reset"
-msgstr ""
+msgstr "გადაწერა"
 
 #: customers/templates/reset_password.html:5
 msgid "Password Reset"
-msgstr ""
+msgstr "პაროლის გადაყენება"
 
 #: customers/templates/reset_password.html:7
 msgid "Forgot your password? Enter your email."
-msgstr ""
+msgstr "დაგავიწყდა პაროლი? შეიყვანეთ თქვენი ელ-ფოსტა."
 
 #: customers/templates/reset_password.html:20
 msgid "Send Email"
-msgstr ""
+msgstr "გაგზავნა"
 
 #: customers/templates/signup.html:8
 msgid "Sign up Form"
+msgstr "რეგისტრაციის ფორმა"
+
+#: customers/templates/update_password.html:24
+msgid "update password"
+msgstr "პაროლის განახლება"
+
+#: payment/email_utils.py:14
+msgid ""
+"Item: {x['em_name']}\n"
+"Price: ₾ {x['em_price']}\n"
+"Size: {x['em_size']}\n"
+"Quantity: {x['em_quantity']}"
+msgstr ""
+"პროდუქტი: {x['em_name']}\n"
+"ფასი: ₾ {x['em_price']}\n"
+"ზომა: {x['em_size']}\n"
+"რაოდენობა: {x['em_quantity']}"
+
+#: payment/email_utils.py:22
+msgid "Kharikha"
 msgstr ""
 
-#: customers/templates/update_password.html:33
-msgid "update password"
-msgstr ""
+
+#: payment/email_utils.py:76
+msgid "Dear Customer,"
+msgstr "ძვირფასო მომხმარებელო"
+
+
+#: payment/email_utils.py:24
+msgid "Your order confirmation"
+msgstr "შენი შეკვეთის დადასტურება"
+
+#: payment/email_utils.py:77
+msgid "We are pleased to confirm your order. Below are the details:"
+msgstr "მოხარული ვართ დავადასტუროთ თქვენი შეკვეთა:"
+
+
+#: payment/email_utils.py:80
+msgid "Order Number:"
+msgstr "შეკვეთის ნომერი"
+
+#: payment/email_utils.py:84
+msgid "Total Paid:"
+msgstr "ჯამში გადახდილია"
+
+#: payment/email_utils.py:88
+msgid "Shipping Address:"
+msgstr "მიტანის მისამართი"
+
+#: payment/email_utils.py:93
+msgid "Here is your order:"
+msgstr "იხილეთ თქვენი შეკვეთა"
+
+#: payment/email_utils.py:97
+msgid "Thank you for shopping with us!"
+msgstr "მადლობა, რომ აგვირჩიეთ ჩვენ"
+
+#: payment/email_utils.py:100
+msgid "kharikha. All rights reserved."
+msgstr "kharikha. ყველა უფლება დაცულია"
+
+
+
 
 #: payment/forms.py:8
 msgid "Fullname"
-msgstr ""
+msgstr "სრული სახელი"
 
 #: payment/forms.py:9
 msgid "Email"
-msgstr ""
+msgstr "ელ-ფოსტა"
 
 #: payment/forms.py:10
 msgid "Address"
-msgstr ""
+msgstr "მისამართი"
 
 #: payment/forms.py:11
 msgid "City"
-msgstr ""
+msgstr "ქალაქი"
 
 #: payment/forms.py:12
 msgid "Zip"
-msgstr ""
+msgstr "საფოსტო კოდი"
 
 #: payment/forms.py:14
 msgid "Extra-Info"
-msgstr ""
+msgstr "დამატებითი ინფორმაცია"
 
 #: payment/forms.py:15
 msgid "ID NUM"
-msgstr ""
+msgstr "ID ნომერი"
 
 #: payment/forms.py:25
 msgid "Card Number"
-msgstr ""
+msgstr "ბარათის ნომერი"
 
 #: payment/forms.py:31
 msgid "Card number must be in the format XXXX-XXXX-XXXX-XXXX."
-msgstr ""
+msgstr "ბარათის ნომერი უნდა იყოს ფორმატში XXXX-XXXX-XXXX-XXXX."
 
 #: payment/forms.py:36 payment/templates/billing.html:16
 #: payment/templates/ch_out.html:19
 msgid "Name"
-msgstr ""
+msgstr "სახელი"
 
 #: payment/forms.py:41
 msgid "Expiration Date"
-msgstr ""
+msgstr "ამოწურის თარიღი"
 
 #: payment/templates/billing.html:11 payment/templates/ch_out.html:10
 msgid "Order Summary"
-msgstr ""
-
-#: payment/templates/billing.html:12 payment/templates/ch_out.html:11
-msgid "Edit"
-msgstr ""
+msgstr "შეკვეთის რეზიუმე"
 
 #: payment/templates/billing.html:30 payment/templates/ch_out.html:32
+#, fuzzy
+#| msgid "Coupon code"
+msgid "Cupon Code"
+msgstr "კუპონის კოდი"
+
+#: payment/templates/billing.html:32 payment/templates/ch_out.html:35
 msgid "Sum"
-msgstr ""
+msgstr "ჯამი"
 
-#: payment/templates/billing.html:56
+#: payment/templates/billing.html:57
+msgid "Make Order"
+msgstr "შეკვეთა"
+
+#: payment/templates/billing.html:63
 msgid "Billing Info"
-msgstr ""
+msgstr "გადახდის ინფორმაცია"
 
-#: payment/templates/billing.html:66
+#: payment/templates/billing.html:73
 msgid "Pay now"
-msgstr ""
+msgstr "გადახდა ახლა"
 
-#: payment/templates/ch_out.html:54
+#: payment/templates/ch_out.html:57
 msgid "Continue to Billing"
-msgstr ""
+msgstr "გადასვლა გადახდაზე"
 
-#: store/templates/base.html:145
-msgid "Account"
-msgstr ""
+#: store/templates/base.html:119
+msgid "Categories"
+msgstr "კატეგორიები"
 
-#: store/templates/base.html:170
-msgid "Logout"
-msgstr ""
-
-#: store/templates/base.html:182
-msgid "EN"
-msgstr ""
-
-#: store/templates/base.html:187
-msgid "English"
-msgstr ""
-
-#: store/templates/base.html:192
-msgid "Georgian"
-msgstr ""
-
-#: store/templates/categories.html:11
+#: store/templates/base.html:123 store/templates/categories.html:11
 msgid "Products"
+msgstr "პროდუქტები"
+
+#: store/templates/base.html:159
+msgid "Account"
+msgstr "ანგარიში"
+
+#: store/templates/base.html:174
+msgid "EN"
+msgstr "EN"
+
+#: store/templates/base.html:179
+msgid "English"
+msgstr "ინგლისური"
+
+#: store/templates/base.html:184
+msgid "ქართული"
 msgstr ""
+
+#: store/templates/base.html:198
+msgid "Logout"
+msgstr "გასვლა"
 
 #: store/templates/categories.html:13
 msgid "List"
-msgstr ""
+msgstr "სია"
 
 #: store/templates/categories.html:44
 msgid "Off"
-msgstr ""
+msgstr "ფასდაკლება"
 
 #: store/templates/categories.html:51 store/templates/home.html:122
 msgid "Add to cart"
+msgstr "დაამატე კალათაში"
+
+#: store/templates/details.html:20 store/templates/details.html:40
+msgid "Slide 1"
 msgstr ""
 
-#: store/templates/details.html:116
+#: store/templates/details.html:26 store/templates/details.html:47
+msgid "Slide 2"
+msgstr ""
+
+#: store/templates/details.html:32 store/templates/details.html:54
+msgid "Slide 3"
+msgstr ""
+
+#: store/templates/details.html:81
+msgid "ხარიხა-KHarikha"
+msgstr ""
+
+#: store/templates/details.html:118
 msgid "Unavailable"
-msgstr ""
+msgstr "მიუწვდომელია"
 
-#: store/templates/details.html:145
+#: store/templates/details.html:136
+msgid "submit"
+msgstr "დადასტურება"
+
+#: store/templates/details.html:147
 msgid "Add to Cart"
-msgstr ""
+msgstr "დაამატე კალათაში"
+
+#: store/templates/details.html:177
+#, fuzzy
+#| msgid "Please choose the right size"
+msgid "Please select a valid size."
+msgstr "გთხოვთ, აირჩიეთ სწორი ზომა"
+
+#: store/templates/details.html:179
+#, fuzzy
+#| msgid "Please choose the right quantity"
+msgid "Please enter a valid quantity."
+msgstr "გთხოვთ, აირჩიეთ სწორი რაოდენობა"
 
 #: store/templates/home.html:74
 msgid "See category"
-msgstr ""
+msgstr "ნახე კატეგორია"
 
 #: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
 msgid "Messages"
@@ -1638,3 +1757,9 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:248
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Subtotal"
+#~ msgstr "ჯამური თანხა"
+
+#~ msgid "Georgian"
+#~ msgstr "ქართული"

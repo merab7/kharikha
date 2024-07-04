@@ -12,6 +12,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 
+
 def checkout(request):
     cart = Cart(request)
     cart_products = cart.get_products()
@@ -60,9 +61,11 @@ def checkout(request):
     }
 
         #cehcking is prices is cahnged because of cupon code and updating new sum price at order summary
-    if request.session['cupon']:
-            context['summary'] = request.session['new_sum']
-            context['cupon_code'] = request.session['cupon']
+    if 'cupon' in request.session:
+        context['summary'] = request.session['new_sum']
+        context['cupon_code'] = request.session['cupon']
+ 
+
 
     if cart_products:
         return render(request, 'ch_out.html', context)
@@ -104,7 +107,7 @@ def billing(request):
         }
 
         #cehcking is prices is cahnged because of cupon code and updating new sum price at order summary
-        if request.session['cupon']:
+        if 'cupon' in request.session:
             context['summary'] = request.session['new_sum']
             context['cupon_code'] = request.session['cupon']
 
@@ -195,7 +198,7 @@ def proc_order(request):
                         sum_order.append(sum_item)
 
             #changing totalpaid for email if therew is  a cuponcode
-            if request.session['new_sum']:
+            if 'cupon' in request.session:
                 total_paid =  request.session['new_sum']           
 
             EMAIL = env('MY_EMAIL')
@@ -204,7 +207,7 @@ def proc_order(request):
 
             # Create the email message
             
-            msg = send_order_confirmation(email, content, EMAIL, sum_order)
+            msg = send_order_confirmation(email, content, EMAIL, sum_order, language=request.LANGUAGE_CODE)
  
             # Send the email
             with smtplib.SMTP('smtp.gmail.com', 587) as mail:
@@ -218,7 +221,7 @@ def proc_order(request):
                 if key == 'session_key':
                     del request.session[key]
 
-            messages.success(request, "Order Placed")
+            
 
 
             #update payment mehtod in the order
@@ -228,7 +231,7 @@ def proc_order(request):
 
 
             # delet cupon code form db
-            if request.session['cupon']:
+            if 'cupon' in request.session:
                 entered_code = request.session['cupon']
                 codes_in_db = CuponCode.objects.filter(code=entered_code)
 
@@ -242,9 +245,12 @@ def proc_order(request):
                     #for now we are not deleting it and alwo user to use it meny times
                     #codes_in_db[0].delete()
                 
+            # deleting session
+            if 'cupon' in request.session:
+                del request.session['cupon']
+                del request.session['new_sum']
 
-
-
+            messages.success(request, "Order Placed")
             # redirect to gome
             return redirect('home')
         else:

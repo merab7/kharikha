@@ -72,3 +72,6 @@ class Cart():
     def get_quantities(self):
         quantities = self.cart
         return quantities        
+    
+    def is_empty(self):
+       return len(self.cart) == 0

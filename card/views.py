@@ -11,23 +11,32 @@ def cart_sum(request):
     cart = Cart(request)
     cart_products = cart.get_products()
     quantities = cart.get_quantities()
-    prices = [ ]     
+    prices = []
+    new_sum = None
+
     if quantities:
         for key, item in quantities.items():
-             for product in cart_products:
-                 if product.name == item['name']:
-                     if product.sale > 0:
-                          prices.append(product.new_price * item['quantity'])
-                     else:
-                         prices.append(product.price * item['quantity'])
-         
+            for product in cart_products:
+                if product.name == item['name']:
+                    if product.sale > 0:
+                        prices.append(product.new_price * item['quantity'])
+                    else:
+                        prices.append(product.price * item['quantity'])
 
-    context  = {
-        'cart_products' : cart_products,
-        'quantities' : quantities,
-        'summary': sum(prices),
+    summary = sum(prices)
+
+    # Retrieve coupon code and new_sum from session
+    cupon_code = request.session.get('cupon')
+    if cupon_code:
+        coupon = CuponCode.objects.filter(code=cupon_code).first()
+        if coupon:
+            new_sum = summary - ((summary * coupon.sale_percentage) / 100)
+
+    context = {
+        'cart_products': cart_products,
+        'quantities': quantities,
+        'summary': new_sum if new_sum else summary,  # Use new_sum if coupon applied, otherwise regular summary
     }
-
 
     return render(request, 'cart_sum.html', context)
 
@@ -90,6 +99,14 @@ def cart_del(request, id , size):
     cart_key = f"{id}_{size}"
     cart = Cart(request)
     cart.delete(cart_key=cart_key)
+
+    # Check if cart is empty, then clear coupon code from session
+    if cart.is_empty():
+        if 'cupon' in request.session:
+            del request.session['cupon']
+        if 'new_sum' in request.session:
+            del request.session['new_sum']
+
     return redirect('cart_sum')
 
 
@@ -112,8 +129,7 @@ def cupon_code(request):
 
         #add pay_method to a session
         pay_methode =  request.POST.get('pay_methode')
-        print(pay_methode)
-        request.session['pay_methode'] = pay_methode
+      
 
 
         entered_code = request.POST.get('cupon')

@@ -3,20 +3,31 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formataddr
 from datetime import datetime
+from django.utils.translation import gettext as _
+from django.utils import translation
 
-def send_order_confirmation(email, content, EMAIL, sum_order):
+def send_order_confirmation(email, content, EMAIL, sum_order, language):
     current_year = datetime.now().year
 
     # Construct the message content for order items
+    if language == 'en':
+        message_content = '\n\n'.join(
+            [f"Item: {x['em_name']}\nPrice: ₾ {x['em_price']}\nSize: {x['em_size']}\nQuantity: {x['em_quantity']}"
+            for x in sum_order]
+        )
+
     message_content = '\n\n'.join(
-        [f"Item: {x['em_name']}\nPrice: ₾ {x['em_price']}\nSize: {x['em_size']}\nQuantity: {x['em_quantity']}"
-         for x in sum_order]
-    )
-    
+        [f"პროდუქტი: {x['em_name']}\nფასი: ₾ {x['em_price']}\nზომა: {x['em_size']}\nრაოდენობა: {x['em_quantity']}"
+        for x in sum_order])
+
+
+    # Activate the selected language
+    translation.activate(language)
+
     msg = MIMEMultipart()
-    msg['From'] = formataddr(('Ecomge', EMAIL))
+    msg['From'] = formataddr((_('Kharikha'), EMAIL))
     msg['To'] = email
-    msg['Subject'] = 'Your order confirmation'
+    msg['Subject'] = _('Your order confirmation')
 
     body = f"""
     <html>
@@ -65,39 +76,42 @@ def send_order_confirmation(email, content, EMAIL, sum_order):
         <body>
             <div class="email-container">
                 <div class="email-header">
-                    <h1>Thank you for your purchase!</h1>
+                    <h1>{_('Thank you for your purchase!')}</h1>
                 </div>
                 <div class="email-body">
-                    <p>Dear Customer,</p>
-                    <p>We are pleased to confirm your order. Below are the details:</p>
+                    <p>{_('Dear Customer,')}</p>
+                    <p>{_('We are pleased to confirm your order. Below are the details:')}</p>
                     <table class="order-details">
                         <tr>
-                            <th>Order Number:</th>
+                            <th>{_('Order Number:')}</th>
                             <td>{content['order_num']}</td>
                         </tr>
                         <tr>
-                            <th>Total Paid:</th>
+                            <th>{_('Total Paid:')}</th>
                             <td>{content['sum']}</td>
                         </tr>
                         <tr>
-                            <th>Shipping Address:</th>
+                            <th>{_('Shipping Address:')}</th>
                             <td>{content['shipping_address']}</td>
                         </tr>
                     </table>
                     <div class="order-items">
-                        <h2>Here is your order:</h2>
+                        <h2>{_('Here is your order:')}</h2>
                         <pre>{message_content}</pre>
                     </div>
              
-                    <p>Thank you for shopping with us!</p>
+                    <p>{_('Thank you for shopping with us!')}</p>
                 </div>
                 <div class="email-footer">
-                    <p>&copy; {current_year} Ecomge. All rights reserved.</p>
+                    <p>&copy; {current_year} {_('kharikha. All rights reserved.')}</p>
                 </div>
             </div>
         </body>
     </html>
     """
     msg.attach(MIMEText(body, 'html', 'utf-8'))
+
+    # Deactivate the language after use
+    translation.deactivate()
 
     return msg
