@@ -88,7 +88,7 @@
 </section>
 
 <!-- Products Section -->
-<section id="products-section" class="mt-5 ps-7 pe-7 pb-3 lg-ps-3 lg-pe-3 sm-pb-6 xs-px-0">
+<section id="products-section" class=" mt-5 ps-7 pe-7 pb-3 lg-ps-3 lg-pe-3 sm-pb-6 xs-px-0 border-bottom p-2">
   <div class="container">
     <div class="row mb-5 xs-mb-8">
       <div class="col-12 text-center">
@@ -140,6 +140,8 @@
           {% endfor %}
         </ul>
 
+ 
+
         <!-- Pagination controls -->
         <div class="pagination justify-content-center mt-5">
           <span class="step-links">
@@ -158,5 +160,51 @@
     </div>
   </div>
 </section>
+<section id="faq">
+  <div  class="container my-5">
+    <h2>{% trans "Frequently Asked Questions" %}</h2>
+    <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    {% trans "What is Bootstrap?" %}
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    {% trans "Bootstrap is a powerful, mobile-first front-end framework for faster and easier web development." %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    {% trans "How to use Bootstrap?" %}
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    {% trans "You can use Bootstrap by including its CSS and JS files in your project and using its pre-defined classes." %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    {% trans "What are the benefits of using Bootstrap?" %}
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    {% trans "Bootstrap offers responsive design, a wide range of components, and a consistent design framework, making web development faster and easier." %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</section>
+
 
 {% endblock %}

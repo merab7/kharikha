@@ -155,9 +155,21 @@
                     </li>
                     <li class="d-flex align-items-center">
                       <input id="at_address" type="radio" name="shipping-option" class="d-block w-auto mb-0 me-10px p-0" onclick="payAtAddress()" />
-                      <label class="md-line-height-18px" for="at_address">{% trans "pay at address" %}</label>
+                      <label class="md-line-height-18px" for="at_address">{% trans "Pay at address" %}</label>
+                    </li>
+                    <li class="d-flex align-items-center">
+                      <input id="account_payment" type="radio" name="shipping-option" class="d-block w-auto mb-0 me-10px p-0" onclick="payToAccount()" />
+                      <label class="md-line-height-18px" for="account_payment">{% trans "Pay to account" %}</label>
                     </li>
                   </ul>
+                </td>
+              </tr>
+              <tr id="account-info" class="d-none">
+                <td colspan="2">
+                  <div class="alert alert-info" role="alert">
+                    {% trans "Account Number: " %}<span id="account-number">1234567890</span>
+                    <button class="btn btn-link" onclick="copyAccountNumber()">{% trans "Copy" %}</button>
+                  </div>
                 </td>
               </tr>
               <tr class="calculate-shipping"></tr>
@@ -218,34 +230,56 @@ $("#apply").click(function () {
     });
 });
 
-    function payAtAddress() {
+function payAtAddress() {
     $.ajax({
-      url: "{% url 'pay_at_address' %}",
-      type: "GET",
-      data: {
-        'csrfmiddlewaretoken': '{{ csrf_token }}',  // include CSRF token for security
-        // sending paymenth option as at_address and thsi function being activated from above html part
-        'shipping_option': 'at_address'
-      },
-      success: function(response) {
-        // Handle success response
-       
-      },
-      error: function(xhr, status, error) {
-        // Handle error response
-        alert("An error occurred: " + error);
-      }
+        url: "{% url 'pay_at_address' %}",
+        type: "GET",
+        data: {
+            'csrfmiddlewaretoken': '{{ csrf_token }}',  
+            'shipping_option': 'at_address'
+        },
+        success: function(response) {
+            // Handle success response
+        },
+        error: function(xhr, status, error) {
+            alert("An error occurred: " + error);
+        }
     });
-  }
-  // checking if the at_address is selected if it is not user shoudl nmot be able to continue shoping (after card pay is implemented)
-  // i should add or...
-  function validatePaymentChoice() {
-    // Check if the payment choice (pay at address) is selected
-    if (!$("#at_address").is(":checked")) {
-      alert("{% trans 'Please select a payment method before proceeding.' %}");
-      return false; // Prevent the default action (checkout redirection)
+}
+
+function payToAccount() {
+    document.getElementById("account-info").classList.remove("d-none");
+    $.ajax({
+        url: "{% url 'pay_at_address' %}",
+        type: "GET",
+        data: {
+            'csrfmiddlewaretoken': '{{ csrf_token }}',  
+            'shipping_option': 'pay_to_account'
+        },
+        success: function(response) {
+            // Handle success response
+        },
+        error: function(xhr, status, error) {
+            alert("An error occurred: " + error);
+        }
+    });
+}
+
+function copyAccountNumber() {
+    var accountNumber = document.getElementById("account-number").textContent;
+    navigator.clipboard.writeText(accountNumber).then(function() {
+        alert("{% trans 'Account number copied to clipboard!' %}");
+    }, function(err) {
+        alert("{% trans 'Failed to copy account number.' %}");
+    });
+}
+
+function validatePaymentChoice() {
+    if (!$("#at_address").is(":checked") && !$("#account_payment").is(":checked")) {
+        alert("{% trans 'Please select a payment method before proceeding.' %}");
+        return false;
     }
-    return true; // Proceed to checkout
-  }
+    return true;
+}
 </script>
 {% endblock %}

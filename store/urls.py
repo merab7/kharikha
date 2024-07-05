@@ -9,4 +9,5 @@ urlpatterns = [
     path('quantity', views.quantity, name='quantity'),
     path('max_quantity', views.max_quantity, name='max_quantity'),
     path('set_language/<str:lang_code>/', views.set_language, name='set_language'),
+   
 ]

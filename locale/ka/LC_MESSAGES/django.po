@@ -30,6 +30,23 @@ msgstr "მთავარი"
 msgid "Product"
 msgstr "პროდუქტი"
 
+#: card/templates/cart_sum.html:158
+msgid "Pay at address"
+msgstr "ადგილზე გადახდა"
+
+#: card/templates/cart_sum.html:162
+msgid "Pay to account"
+msgstr "ანგარიშზე ჩარიცხვა"
+
+#: card/templates/cart_sum.html:170
+msgid "Account Number: "
+msgstr "ანგარიშის ნომერი: "
+
+#: card/templates/cart_sum.html:171
+msgid "Copy"
+msgstr "დააკოპირე"
+
+
 #: card/templates/cart_sum.html:40 card/templates/cart_sum.html:68
 #: payment/templates/billing.html:20 payment/templates/billing.html:23
 #: payment/templates/ch_out.html:22 payment/templates/ch_out.html:25

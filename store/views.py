@@ -98,3 +98,5 @@ def set_language(request, lang_code):
     response = HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
     return response
+
+
