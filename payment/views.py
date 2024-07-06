@@ -188,14 +188,26 @@ def proc_order(request):
             sum_order = []
             for key, item in quantities.items():
                 for product in cart_products:
-                    if product.name == item['name']:
-                        sum_item = {
-                            'em_name': item['name'],
-                            'em_price': product.new_price if product.sale > 0 else item['price'],
-                            'em_size': item['size'],
-                            'em_quantity': item['quantity']
-                        }
-                        sum_order.append(sum_item)
+                    # name in email will be in georgian
+                    if request.LANGUAGE_CODE == 'ka':
+                        if product.name == item['name']:
+                            sum_item = {
+                                'em_name': product.name,
+                                'em_price': product.new_price if product.sale > 0 else item['price'],
+                                'em_size': item['size'],
+                                'em_quantity': item['quantity']
+                            }
+                            sum_order.append(sum_item)
+                    # name in email will be in english
+                    elif request.LANGUAGE_CODE == 'en':
+                        if product.name == item['name']:
+                                sum_item = {
+                                    'em_name': product.name_en,
+                                    'em_price': product.new_price if product.sale > 0 else item['price'],
+                                    'em_size': item['size'],
+                                    'em_quantity': item['quantity']
+                                }
+                                sum_order.append(sum_item)            
 
             #changing totalpaid for email if therew is  a cuponcode
             if 'cupon' in request.session:

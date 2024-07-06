@@ -7,14 +7,23 @@
       <div class="container">
         <div class="row mb-5 xs-mb-8">
           <div class="col-12 text-center">
+            {% if request.LANGUAGE_CODE == 'ka' %}
             <h2 class="alt-font text-dark-gray mb-0 ls-minus-2px">
-              {% trans "Products" %}
               <span class="text-highlight fw-600">
-                {% trans "List" %}<span
+                {{category.name }}<span
                   class="bg-base-color h-5px bottom-2px"
                 ></span>
               </span>
             </h2>
+            {% else %}
+            <h2 class="alt-font text-dark-gray mb-0 ls-minus-2px">
+              <span class="text-highlight fw-600">
+                {{ category.name_en }}<span
+                  class="bg-base-color h-5px bottom-2px"
+                ></span>
+              </span>
+            </h2>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -55,11 +64,11 @@
                 </a>
               </div>
               <div class="shop-footer text-center">
-                <a
-                  href="{% url 'details' product.id %}"
-                  class="alt-font text-dark-gray fs-19 fw-500"
-                  >{{ product.name }}</a
-                >
+                {% if request.LANGUAGE_CODE == 'ka' %}
+                <a href="{% url 'details' product.id %}" class="alt-font text-dark-gray fs-19 fw-500">{{ product.name }}</a>
+                {% else %}
+                <a href="{% url 'details' product.id %}" class="alt-font text-dark-gray fs-19 fw-500">{{ product.name_en }}</a>
+                {% endif %}
                 {% if product.sale > 0 %}
                 <div class="price lh-22 fs-16">
                   <del>${{ product.price }}</del> ${{ product.new_price }}

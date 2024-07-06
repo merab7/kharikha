@@ -33,8 +33,12 @@
                     <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="responsive-img" />
                   </div>
                   <div class="flex-item text-center text-md-start ms-md-4"> <!-- Added text-center for small screens and ms-md-4 for left margin on medium screens and up -->
-                    <h2 class="text-white mb-2 mb-md-0">Hariha•ხარიხა</h2>
+                    <h2 class="text-white mb-2 mb-md-0">Khariha•ხარიხა</h2>
+                    {% if request.LANGUAGE_CODE == 'ka' %}
                     <h3 class="text-white-50 mb-0">ატარე შენი გუნდის ფერები!</h3>
+                    {% else %}
+                    <h3 class="text-white-50 mb-0">Wear your team's colors!</h3>
+                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -78,7 +82,12 @@
             </a>
           </div>
           <div class="shop-footer text-center">
-            <a href="{% url 'category' category.name %}" class="alt-font text-dark-gray fs-19 fw-500">{{ category.name }}</a>
+            {% if request.LANGUAGE_CODE == 'ka' %}
+            <a href="{% url 'category' category.name %}" class="alt-font text-dark-gray fs-19 fw-500">{{category.name }}</a>
+            {% else %}
+            <a href="{% url 'category' category.name%}" class="alt-font text-dark-gray fs-19 fw-500">{{ category.name_en }}</a>
+            {% endif %}
+            <!-- <a href="{% url 'category' category.name %}" class="alt-font text-dark-gray fs-19 fw-500">{{ category.name }}</a> -->
           </div>
         </div>
       </li>
@@ -112,7 +121,7 @@
                   <div class="shop-overlay bg-gradient-gray-light-dark-transparent"></div>
                   {% if product.sale > 0 %}
                   <div class="sale-percentage position-absolute top-0 start-0 bg-danger text-white px-2 py-1">
-                    {{ product.sale }}% Off
+                    {{ product.sale }}%{% trans "Off" %}
                   </div>
                   {% endif %}
                   <div class="shop-hover d-flex justify-content-center align-items-center w-100 h-100 position-absolute top-0 start-0">
@@ -126,7 +135,11 @@
                 </a>
               </div>
               <div class="shop-footer text-center">
+                {% if request.LANGUAGE_CODE == 'ka' %}
                 <a href="{% url 'details' product.id %}" class="alt-font text-dark-gray fs-19 fw-500">{{ product.name }}</a>
+                {% else %}
+                <a href="{% url 'details' product.id %}" class="alt-font text-dark-gray fs-19 fw-500">{{ product.name_en }}</a>
+                {% endif %}
                 {% if product.sale > 0 %}
                 <div class="price lh-22 fs-16">
                   <del>${{ product.price }}</del> ${{ product.new_price }}

@@ -48,7 +48,8 @@ def category(request, cat_name):
 
     context = {
         'page_obj': page_obj,
-        'cat_name': cat_name
+        'cat_name': cat_name,
+        'category': category
     }
 
     return render(request, 'categories.html', context)

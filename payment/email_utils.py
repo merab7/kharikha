@@ -9,20 +9,22 @@ from django.utils import translation
 def send_order_confirmation(email, content, EMAIL, sum_order, language):
     current_year = datetime.now().year
 
-    # Construct the message content for order items
+   
+
+    # Activate the selected language
+    translation.activate(language)
+
+     # Construct the message content for order items
     if language == 'en':
         message_content = '\n\n'.join(
             [f"Item: {x['em_name']}\nPrice: ₾ {x['em_price']}\nSize: {x['em_size']}\nQuantity: {x['em_quantity']}"
             for x in sum_order]
         )
+    if language == 'ka' :    
+        message_content = '\n\n'.join(
+            [f"პროდუქტი: {x['em_name']}\nფასი: ₾ {x['em_price']}\nზომა: {x['em_size']}\nრაოდენობა: {x['em_quantity']}"
+            for x in sum_order])
 
-    message_content = '\n\n'.join(
-        [f"პროდუქტი: {x['em_name']}\nფასი: ₾ {x['em_price']}\nზომა: {x['em_size']}\nრაოდენობა: {x['em_quantity']}"
-        for x in sum_order])
-
-
-    # Activate the selected language
-    translation.activate(language)
 
     msg = MIMEMultipart()
     msg['From'] = formataddr((_('Kharikha'), EMAIL))

@@ -49,20 +49,33 @@ def cart_add(request):
         product = get_object_or_404(Product, id=product_id)
         user_quantity = int(request.POST.get('user_quantity'))
         product_size = request.POST.get('product_size')
+
+        if cart.contains(product=product, size=product_size):
+            response = JsonResponse({'message': 'Product is already in the cart'})
+            return response
+
         cart.add(product=product, size=product_size, quantity=user_quantity)
         cart_count = cart.__len__()
         response = JsonResponse({'count': cart_count})
-        messages.success(request, (f'Product: {product.name} added to the cart'))
+        messages.success(request, f'Product: {product.name} added to the cart')
         return response
 
+def is_in_cart(request):
+    cart = Cart(request)
+    product_id = int(request.POST.get('product_id'))
+    product = get_object_or_404(Product, id=product_id)
+    product_size = request.POST.get('product_size')
+    
+    in_cart = cart.contains(product=product, size=product_size)
+    return JsonResponse({'in_cart': in_cart})
 
 
 
 def edit(request, id, size):
     cart = Cart(request)
     products = cart.get_quantities()
-    product_form_model = get_object_or_404(Product, id=id)
-    size_count = ProductSize.objects.filter(product=product_form_model)
+    product_from_model = get_object_or_404(Product, id=id)
+    size_count = ProductSize.objects.filter(product=product_from_model)
     cart_key = f"{id}_{size}"
     for x in products.keys():
         if products[x]['id']== id and products[x]['size'] == size :
@@ -71,7 +84,7 @@ def edit(request, id, size):
 
     context = {
         'product': product,
-        'product_from_model': product_form_model,
+        'product_from_model': product_from_model,
         'size_count': size_count,
         'cart_key': cart_key
     }

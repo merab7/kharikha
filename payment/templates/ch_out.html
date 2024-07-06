@@ -16,7 +16,11 @@
         <!--  -->
         {% if product.name == item.name %}
         <div class="card-body border-bottom">
-          <h6 class="card-title">{% trans "Name" %}: {{ item.name }}</h6>
+          {% if request.LANGUADGE_CODE == 'ka' %}:
+          <h6 class="card-title">{% trans "Name" %}: {{ product.name }}</h6>
+          {% else %}
+          <h6 class="card-title">{% trans "Name" %}: {{ product.name_en }}</h6>
+          {% endif %}
           {% if product.sale > 0 %}
           <h6 class="card-text">
             {% trans "Price" %}: ${{ product.new_price }}

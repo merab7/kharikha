@@ -40,7 +40,7 @@ msgstr "ანგარიშზე ჩარიცხვა"
 
 #: card/templates/cart_sum.html:170
 msgid "Account Number: "
-msgstr "ანგარიშის ნომერი: "
+msgstr "ანგარიშის ნომერი: "         
 
 #: card/templates/cart_sum.html:171
 msgid "Copy"
@@ -344,17 +344,7 @@ msgstr "რეგისტრაციის ფორმა"
 msgid "update password"
 msgstr "პაროლის განახლება"
 
-#: payment/email_utils.py:14
-msgid ""
-"Item: {x['em_name']}\n"
-"Price: ₾ {x['em_price']}\n"
-"Size: {x['em_size']}\n"
-"Quantity: {x['em_quantity']}"
-msgstr ""
-"პროდუქტი: {x['em_name']}\n"
-"ფასი: ₾ {x['em_price']}\n"
-"ზომა: {x['em_size']}\n"
-"რაოდენობა: {x['em_quantity']}"
+
 
 #: payment/email_utils.py:22
 msgid "Kharikha"
