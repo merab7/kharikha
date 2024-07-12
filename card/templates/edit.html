@@ -114,9 +114,11 @@
             <option selected value="{{ product.size }}">
               {{ product.size }}
             </option>
-            {% for size in size_count %} {% if size.size != product.size %}
+            {% for size in size_count %}
+            {% if size.quantity %}
+            {% if size.size != product.size %}
             <option value="{{ size.size }}">{{ size.size }}</option>
-            {% endif %}  {% endfor %}
+            {% endif %} {% endif %} {% endfor %}
           </select>
         </div>
         <div class="d-flex pb-2">

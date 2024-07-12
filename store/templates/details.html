@@ -69,10 +69,12 @@
           <ul class="shop-size mb-0">
             {% if size_count %}
             {% for size in size_count %}
+            {% if size.quantity  %}
             <li>
               <input class="d-none" type="radio" id="size-{{ size.size }}" name="size" value="{{ size.size }}" />
               <label for="size-{{ size.size }}"><span>{{ size.size }}</span></label>
             </li>
+            {% endif %}
             {% endfor %}
             {% else %}
             <li><span>{% trans "Unavailable" %}</span></li>

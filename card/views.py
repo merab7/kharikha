@@ -50,6 +50,15 @@ def cart_add(request):
         user_quantity = int(request.POST.get('user_quantity'))
         product_size = request.POST.get('product_size')
 
+        size_count = ProductSize.objects.filter(product=product)
+        
+        for item in size_count:
+            if item.size == product_size:
+                item.quantity = item.quantity - user_quantity
+                item.save()
+
+
+
         if cart.contains(product=product, size=product_size):
             response = JsonResponse({'message': 'Product is already in the cart'})
             return response
@@ -109,8 +118,27 @@ def update(request):
     
 
 def cart_del(request, id , size):
-    cart_key = f"{id}_{size}"
     cart = Cart(request)
+
+    
+    
+    #rebuild size quintity after deleting from cart
+    product = get_object_or_404(Product, id=id)
+    products_cart = cart.get_quantities()
+    size_count = ProductSize.objects.filter(product=product)
+
+    for x in products_cart.keys():
+        if products_cart[x]['id']== id and products_cart[x]['size'] == size :
+            user_quantity = products_cart[x]['quantity']
+
+    for item in size_count:
+        if item.size == size:
+            item.quantity = item.quantity + user_quantity
+            item.save()
+
+
+  
+    cart_key = f"{id}_{size}"
     cart.delete(cart_key=cart_key)
 
     # Check if cart is empty, then clear coupon code from session

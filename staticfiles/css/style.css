@@ -98,6 +98,7 @@ html {
   font-size: 16px;
 }
 body {
+ 
   font-family: var(--primary-font);
   font-size: 16px;
   line-height: 30px;
@@ -6778,7 +6779,7 @@ header .navbar {
   z-index: 99;
 }
 header .navbar [class*=col-] {
-  padding: 0 15px;
+  padding: 0 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8970,7 +8971,7 @@ button:focus {
   box-shadow: none;
 }
 .navbar-toggler-line {
-  background: var(--dark-gray);
+  background: var(--black);
   height: 2px;
   width: 22px;
   content: "";
@@ -19231,4 +19232,53 @@ footer .footer-navbar .nav-item:last-child a {
 }
 .footer-demo img {
   max-height: 55px !important;
+}
+
+
+section{
+margin-bottom: 900px;
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination .step-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pagination .page-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-link:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination .page-link.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.pagination .pagination span {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  color: #333;
 }

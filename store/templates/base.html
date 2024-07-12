@@ -80,7 +80,7 @@
     <!-- Start header -->
     <header>
       <nav
-        class="bg-base-color navbar navbar-expand-md header-light p-1 "
+        class="bg-base-color navbar navbar-expand-lg header-light p-1 "
       >
         <div class="container-fluid ">
           <button
@@ -125,6 +125,15 @@
                 <li class="nav-item">
                   <a class="nav-link fs-4" href="#faq">{% trans "FAQ" %}</a>
                 </li>
+                {% if request.LANGUAGE_CODE == 'en' %}
+                <li class="nav-item">
+                  <a class="nav-link fs-4" href="#contact">{% trans "Contact" %}</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link fs-4" href="#contact">{% trans "კონტაქტი" %}</a>
+                </li>
+                {% endif %}
                 {% endif %}
               </ul>
             </div>
@@ -240,7 +249,6 @@
       </div>
     </footer>
 
-    <!-- Smooth Scroll Script -->
     <script>
       document.querySelectorAll("a.nav-link[href^='#']").forEach((anchor) => {
         anchor.addEventListener("click", function (e) {

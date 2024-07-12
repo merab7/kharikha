@@ -18,12 +18,25 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
+def load_products(request):
+    products = Product.objects.all()
+    paginator = Paginator(products, 5)  # Show 5 products per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj
+    }
+    return render(request, 'partials/products.html', context)
+
 
 def details(request, pk):
     product = Product.objects.get(id=pk)
     size_count = ProductSize.objects.filter(product=product)
     max_quantity = int()
-  
+    
+    
 
 
     context = {

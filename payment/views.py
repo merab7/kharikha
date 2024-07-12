@@ -175,11 +175,11 @@ def proc_order(request):
                         set_order_item = Order_item(order=order, product=product_item, user=user, quantity=quantity, price=product_price, size=size)
                         set_order_item.save()
                         #updating products database after successful purchase
-                        for x in ProductSize.objects.all():
-                            if x.product == product_item and x.size == size:
-                                curent_qu = x.quantity
-                                x.quantity = curent_qu - quantity
-                                x.save()                               
+                        # for x in ProductSize.objects.all():
+                        #     if x.product == product_item and x.size == size:
+                        #         curent_qu = x.quantity
+                        #         x.quantity = curent_qu - quantity
+                        #         x.save()                               
                                 
                                      
                                     
@@ -271,5 +271,12 @@ def proc_order(request):
     
     # after implementing card payment i should update this part 
     else:
+        #if porchuse is not ok that regenerate item size quantity
+        for x in ProductSize.objects.all():
+            if x.product == product_item and x.size == size:
+                curent_qu = x.quantity
+                x.quantity = curent_qu + quantity
+                x.save()                               
+    
         return redirect('home')
     
