@@ -213,7 +213,7 @@ def proc_order(request):
             if 'cupon' in request.session:
                 total_paid =  request.session['new_sum']           
 
-            EMAIL = env('MY_EMAIL')
+            EMAIL = env('EXCAVATIO')
             EXCAVATIOPASS = env('EMAIL_PASSWORD')
             content = {'order_num': f"Order number: {order.pk}",  'sum': total_paid, 'shipping_address':shipping_address}
 

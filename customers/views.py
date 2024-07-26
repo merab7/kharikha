@@ -151,7 +151,7 @@ def profile(request):
 
 @login_required
 def my_orders(request):
-    my_orders = Order.objects.filter(user=request.user)
+    my_orders = Order.objects.filter(user=request.user).order_by('-date')
     my_items = Order_item.objects.filter(user=request.user)
     my_order_data = [
     {
@@ -170,7 +170,7 @@ def my_orders(request):
     }
     for my_order in my_orders
 ]
-    paginator = Paginator(my_order_data, 5)
+    paginator = Paginator(my_order_data, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number) 
     context = {
